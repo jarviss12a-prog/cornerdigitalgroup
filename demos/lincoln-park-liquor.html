@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lincoln Park Food & Liquor | Chicago's Corner Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0D0D0D;
+  --charcoal: #1A1A1A;
+  --dark2:    #242424;
+  --amber:    #D4882A;
+  --amber-lt: #F2A94A;
+  --amber-dk: #A8620A;
+  --cream:    #FAF6EE;
+  --warm-white:#F5F0E8;
+  --mid:      #888;
+  --light:    #BBB;
+  --red:      #C0392B;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--black); color: white; overflow-x: hidden; }
+
+/* ─── LOADER ─── */
+.loader { position: fixed; inset: 0; background: var(--black); z-index: 1000; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; transition: opacity 0.7s ease, visibility 0.7s; }
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: white; letter-spacing: 3px; text-transform: uppercase; }
+.loader-logo span { color: var(--amber); font-style: italic; }
+.loader-bar { width: 180px; height: 1px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.loader-fill { height: 100%; width: 0; background: var(--amber); transition: width 1.2s ease; }
+
+/* ─── HAMBURGER / MOBILE MENU ─── */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 200; }
+.nav-hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--charcoal); z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; text-decoration: none; font-weight: 400; transition: color 0.2s; }
+.mobile-menu a:hover, .mobile-menu a:active { color: var(--amber); }
+.mobile-menu .mob-order-btn { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; background: var(--amber); color: var(--black); padding: 14px 36px; font-weight: 600; }
+
+/* ─── NAV ─── */
+nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 0 60px; height: 76px; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
+nav.scrolled { background: rgba(13,13,13,0.97); backdrop-filter: blur(20px); height: 62px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 1px; color: white; text-decoration: none; line-height: 1.2; }
+.nav-logo span { display: block; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); font-family: 'DM Sans', sans-serif; font-weight: 500; margin-top: 2px; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.6); font-weight: 400; transition: color 0.2s; }
+.nav-links a:hover { color: var(--amber); }
+.nav-order-btn { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; background: var(--amber); color: var(--black); padding: 10px 22px; font-weight: 600; transition: all 0.3s; white-space: nowrap; }
+.nav-order-btn:hover { background: var(--amber-lt); transform: translateY(-1px); }
+
+/* ─── DELIVERY BANNER ─── */
+.delivery-banner { position: fixed; top: 76px; left: 0; right: 0; z-index: 99; background: var(--amber); padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 12px; transition: top 0.4s; }
+nav.scrolled ~ .delivery-banner { top: 62px; }
+.delivery-banner .db-text { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--black); font-weight: 600; }
+.delivery-banner .db-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.db-pill { background: rgba(0,0,0,0.15); color: var(--black); font-size: 0.7rem; letter-spacing: 1px; padding: 4px 12px; font-weight: 700; border-radius: 2px; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+.db-pill:hover { background: rgba(0,0,0,0.3); }
+.db-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--black); opacity: 0.4; flex-shrink: 0; }
+
+/* ─── HERO ─── */
+.hero { min-height: 100svh; position: relative; display: flex; align-items: center; overflow: hidden; padding-top: 120px; }
+.hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1800&q=85') center/cover no-repeat; }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.7) 50%, rgba(13,13,13,0.5) 100%); }
+.hero-content { position: relative; z-index: 1; padding: 0 80px; max-width: 1200px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--amber); color: var(--black); padding: 8px 18px; margin-bottom: 28px; }
+.hero-badge .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--black); animation: blink 1.5s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-badge span { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.0; margin-bottom: 24px; color: white; }
+.hero h1 em { font-style: italic; color: var(--amber); }
+.hero-sub { color: rgba(255,255,255,0.6); font-size: 1.05rem; font-weight: 300; max-width: 440px; line-height: 1.8; margin-bottom: 40px; }
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.btn-amber { font-size: 0.78rem; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; background: var(--amber); color: var(--black); padding: 16px 36px; font-weight: 700; transition: all 0.3s; display: inline-block; }
+.btn-amber:hover { background: var(--amber-lt); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(212,136,42,0.4); }
+.btn-outline { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 16px 32px; transition: all 0.3s; display: inline-block; }
+.btn-outline:hover { border-color: white; color: white; }
+.hero-stats { position: absolute; right: 80px; bottom: 80px; z-index: 1; display: flex; flex-direction: column; gap: 20px; text-align: right; }
+.hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: white; line-height: 1; }
+.hero-stat-label { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.hero-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hero-scroll span { font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: sp 2s ease infinite; }
+@keyframes sp { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* ─── DELIVERY SECTION ─── */
+.delivery-section { background: var(--charcoal); padding: 100px 60px; }
+.delivery-inner { max-width: 1100px; margin: 0 auto; }
+.delivery-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 72px; }
+.delivery-text .eyebrow { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.delivery-text .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.delivery-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+.delivery-text h2 em { font-style: italic; color: var(--amber); }
+.delivery-text p { color: var(--light); font-size: 0.95rem; line-height: 1.9; font-weight: 300; }
+.delivery-platforms { display: flex; flex-direction: column; gap: 16px; }
+.platform-card { background: var(--dark2); padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s; text-decoration: none; border: 1px solid rgba(255,255,255,0.05); }
+.platform-card:hover { background: #2e2e2e; border-color: var(--amber); }
+.platform-info { display: flex; align-items: center; gap: 16px; }
+.platform-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.platform-icon.dd { background: #FF3008; }
+.platform-icon.gh { background: #F63440; }
+.platform-icon.ue { background: #06C167; }
+.platform-name { font-size: 1rem; font-weight: 600; color: white; }
+.platform-sub { font-size: 0.78rem; color: var(--mid); margin-top: 2px; }
+.platform-arrow { color: var(--amber); font-size: 1.1rem; }
+.delivery-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+.delivery-feature { background: var(--charcoal); padding: 36px 32px; text-align: center; }
+.df-icon { font-size: 2rem; margin-bottom: 16px; }
+.df-title { font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 8px; }
+.df-desc { font-size: 0.83rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+/* ─── MARQUEE ─── */
+.marquee-wrap { background: var(--amber); padding: 14px 0; overflow: hidden; }
+.marquee-track { display: flex; white-space: nowrap; animation: marquee 20s linear infinite; }
+.marquee-item { font-size: 0.85rem; color: var(--black); letter-spacing: 3px; text-transform: uppercase; padding: 0 36px; font-weight: 600; }
+.marquee-sep { color: rgba(0,0,0,0.35); margin: 0 4px; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ─── PREMIUM SPIRITS ─── */
+.premium { background: var(--charcoal); padding: 100px 60px; }
+.premium-inner { max-width: 1100px; margin: 0 auto; }
+.premium-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+.premium-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; }
+.premium-header h2 em { font-style: italic; color: var(--amber); }
+.premium-header p { max-width: 280px; color: var(--mid); font-size: 0.88rem; line-height: 1.8; text-align: right; font-weight: 300; }
+.spirits-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: 2px; }
+.spirit-card { background: var(--dark2); padding: 32px 20px 28px; text-align: center; position: relative; overflow: hidden; transition: background 0.3s; border: 1px solid rgba(255,255,255,0.04); cursor: default; }
+.spirit-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transition: transform 0.3s; }
+.spirit-card:hover { background: #2a2a2a; }
+.spirit-card:hover::after { transform: scaleX(1); }
+.spirit-emoji { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+.spirit-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.spirit-brands { font-size: 0.75rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+.spirit-brands strong { color: var(--amber); display: block; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 4px; font-family: 'DM Sans', sans-serif; font-weight: 600; text-transform: uppercase; }
+.premium-banner { background: var(--amber); padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.premium-banner-text { font-size: 0.85rem; font-weight: 600; color: var(--black); letter-spacing: 0.5px; }
+.premium-banner-text span { font-size: 0.75rem; font-weight: 400; opacity: 0.7; margin-left: 8px; }
+.premium-banner a { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.3); padding-bottom: 1px; transition: opacity 0.2s; white-space: nowrap; }
+.premium-banner a:hover { opacity: 0.7; }
+
+/* ─── CATEGORIES ─── */
+.categories { background: var(--black); padding: 100px 60px; }
+.categories-header { text-align: center; margin-bottom: 64px; }
+.categories-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; margin-bottom: 12px; }
+.categories-header h2 em { font-style: italic; color: var(--amber); }
+.categories-header p { color: var(--mid); font-size: 0.9rem; }
+.eyebrow-center { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.eyebrow-center::before, .eyebrow-center::after { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.cat-card { position: relative; height: 320px; overflow: hidden; cursor: pointer; }
+.cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.65); }
+.cat-card:hover img { transform: scale(1.06); filter: brightness(0.5); }
+.cat-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 28px 20px; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); }
+.cat-icon { font-size: 2rem; margin-bottom: 8px; }
+.cat-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; text-align: center; }
+.cat-count { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-top: 4px; }
+.cat-card.featured { grid-column: span 2; }
+
+/* ─── WHY US ─── */
+.why-us { display: grid; grid-template-columns: 1fr 1fr; }
+.why-img { position: relative; min-height: 560px; overflow: hidden; }
+.why-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
+.why-img-badge { position: absolute; bottom: 32px; left: 32px; background: var(--amber); color: var(--black); padding: 20px 24px; }
+.why-img-badge strong { font-family: 'Playfair Display', serif; font-size: 2rem; display: block; font-weight: 900; line-height: 1; }
+.why-img-badge span { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; opacity: 0.7; }
+.why-text { background: var(--charcoal); padding: 80px 70px; display: flex; align-items: center; }
+.why-text-inner { max-width: 480px; }
+.why-text .eyebrow { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.why-text .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.why-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+.why-text h2 em { font-style: italic; color: var(--amber); }
+.why-text p { color: var(--light); font-size: 0.93rem; line-height: 1.9; font-weight: 300; margin-bottom: 36px; }
+.why-list { display: flex; flex-direction: column; gap: 18px; }
+.why-item { display: flex; gap: 16px; align-items: flex-start; }
+.why-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--amber); font-weight: 700; line-height: 1; min-width: 28px; }
+.why-item-text h4 { font-size: 0.9rem; font-weight: 600; color: white; margin-bottom: 4px; }
+.why-item-text p { font-size: 0.82rem; color: var(--mid); font-weight: 300; line-height: 1.6; }
+
+/* ─── HOURS & MAP ─── */
+.hours-section { background: var(--black); display: grid; grid-template-columns: 1fr 1fr; }
+.hours-left { padding: 80px 70px; display: flex; flex-direction: column; justify-content: center; }
+.hours-left .eyebrow { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.hours-left .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.hours-left h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 36px; }
+.hours-left h2 em { font-style: italic; color: var(--amber); }
+.hours-table { width: 100%; }
+.hours-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+.hours-row:last-child { border: none; }
+.hours-day { color: rgba(255,255,255,0.5); }
+.hours-time { color: white; font-weight: 500; }
+.hours-row.today { background: rgba(212,136,42,0.08); margin: 0 -8px; padding: 13px 8px; border-radius: 3px; }
+.hours-row.today .hours-day, .hours-row.today .hours-time { color: var(--amber); }
+.contact-pills { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); }
+.contact-pill { display: flex; gap: 12px; font-size: 0.88rem; color: rgba(255,255,255,0.5); align-items: center; }
+.contact-pill a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.contact-pill a:hover { color: var(--amber); }
+.hours-right { position: relative; min-height: 500px; }
+.hours-right iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(1) invert(0.9) contrast(0.85); }
+
+/* ─── ORDER CTA ─── */
+.order-cta { background: var(--amber); padding: 90px 60px; text-align: center; }
+.order-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 900; color: var(--black); margin-bottom: 16px; }
+.order-cta h2 em { font-style: italic; }
+.order-cta p { color: rgba(0,0,0,0.6); font-size: 1rem; margin-bottom: 44px; font-weight: 300; }
+.order-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-dark { font-size: 0.75rem; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; background: var(--black); color: white; padding: 16px 36px; font-weight: 700; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-dark:hover { background: var(--charcoal); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+.btn-dark .btn-icon { font-size: 1.1rem; }
+.btn-dark-outline { font-size: 0.75rem; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; border: 2px solid var(--black); color: var(--black); padding: 16px 36px; font-weight: 700; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-dark-outline:hover { background: var(--black); color: white; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-main { max-width: 1100px; margin: 0 auto; padding: 72px 60px 48px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+.footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 6px; }
+.footer-brand-sub { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 16px; }
+.footer-desc { color: rgba(255,255,255,0.35); font-size: 0.85rem; line-height: 1.8; font-weight: 300; max-width: 260px; }
+.footer-delivery-icons { display: flex; gap: 10px; margin-top: 20px; }
+.fdi { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; text-decoration: none; transition: transform 0.2s; }
+.fdi:hover { transform: scale(1.1); }
+.fdi.dd { background: #FF3008; }
+.fdi.gh { background: #F63440; }
+.fdi.ue { background: #06C167; }
+.footer-col h5 { color: white; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col ul a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.85rem; font-weight: 300; transition: color 0.2s; }
+.footer-col ul a:hover { color: rgba(255,255,255,0.75); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 20px 60px 32px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+.footer-bottom a { color: var(--amber); text-decoration: none; }
+
+/* ─── FLOAT BTN ─── */
+.float-btn { position: fixed; bottom: 28px; right: 28px; z-index: 99; background: var(--amber); color: var(--black); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; padding: 13px 24px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s; opacity: 0; pointer-events: none; box-shadow: 0 8px 28px rgba(212,136,42,0.5); font-weight: 700; }
+.float-btn.visible { opacity: 1; pointer-events: auto; }
+.float-btn:hover { background: var(--amber-lt); transform: translateY(-2px); }
+.float-btn .fdot { width: 6px; height: 6px; border-radius: 50%; background: var(--black); animation: blink 1.5s infinite; }
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─── RESPONSIVE — TABLET ─── */
+@media (max-width: 900px) {
+  .premium { padding: 72px 24px; }
+  .premium-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .premium-header p { text-align: left; max-width: 100%; }
+  .spirits-grid { grid-template-columns: repeat(3, 1fr); }
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-order-btn { display: none; }
+  .nav-hamburger { display: flex; }
+  .delivery-banner { top: 64px; flex-wrap: wrap; gap: 8px; }
+  .hero { padding-top: 130px; }
+  .hero-content { padding: 0 24px; }
+  .hero-stats { right: 24px; bottom: 64px; }
+  .delivery-section { padding: 72px 24px; }
+  .delivery-top { grid-template-columns: 1fr; gap: 48px; }
+  .delivery-features { grid-template-columns: 1fr; }
+  .cats-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card.featured { grid-column: span 2; }
+  .why-us { grid-template-columns: 1fr; }
+  .why-img { min-height: 320px; }
+  .why-text { padding: 60px 28px; }
+  .hours-section { grid-template-columns: 1fr; }
+  .hours-left { padding: 60px 24px; }
+  .hours-right { min-height: 320px; }
+  .categories { padding: 72px 24px; }
+  .order-cta { padding: 72px 24px; }
+  .footer-main { grid-template-columns: 1fr 1fr; padding: 56px 24px 40px; gap: 36px; }
+  .footer-bottom { padding: 16px 24px 28px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ─── RESPONSIVE — IPHONE ─── */
+@media (max-width: 480px) {
+  .premium { padding: 56px 16px; }
+  .spirits-grid { grid-template-columns: repeat(2, 1fr); }
+  .premium-banner { padding: 18px 20px; }
+  .spirit-card { padding: 24px 14px 20px; }
+  .spirit-emoji { font-size: 2rem; }
+  .cursor, .cursor-ring { display: none; }
+  nav { height: 60px; padding: 0 16px; }
+  nav.scrolled { height: 54px; }
+  .nav-logo { font-size: 1rem; }
+  .nav-logo span { font-size: 0.58rem; }
+
+  .delivery-banner { top: 60px; padding: 8px 14px; gap: 6px; }
+  .db-text { font-size: 0.7rem; }
+  .db-pill { font-size: 0.65rem; padding: 4px 10px; }
+
+  .hero { padding-top: 120px; min-height: 100svh; }
+  .hero-content { padding: 0 18px; }
+  .hero-badge { padding: 7px 14px; margin-bottom: 20px; }
+  .hero-badge span { font-size: 0.66rem; }
+  .hero h1 { font-size: clamp(2.6rem, 11vw, 3.4rem); margin-bottom: 16px; }
+  .hero-sub { font-size: 0.88rem; margin-bottom: 28px; }
+  .btn-amber { padding: 14px 28px; font-size: 0.72rem; width: 100%; text-align: center; }
+  .btn-outline { padding: 14px 28px; font-size: 0.72rem; width: 100%; text-align: center; }
+  .hero-actions { flex-direction: column; gap: 12px; width: 100%; }
+  .hero-stats { display: none; }
+  .hero-scroll { display: none; }
+
+  .delivery-section { padding: 56px 16px; }
+  .delivery-top { gap: 36px; }
+  .platform-card { padding: 18px 20px; }
+  .platform-icon { width: 38px; height: 38px; font-size: 1.2rem; }
+  .delivery-feature { padding: 28px 20px; }
+
+  .categories { padding: 56px 16px; }
+  .cats-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+  .cat-card { height: 200px; }
+  .cat-card.featured { grid-column: span 2; height: 240px; }
+  .cat-name { font-size: 1.1rem; }
+
+  .why-img { min-height: 260px; }
+  .why-text { padding: 48px 18px; }
+  .why-text-inner { max-width: 100%; }
+  .why-list { gap: 16px; }
+
+  .hours-left { padding: 48px 18px; }
+  .hours-row { font-size: 0.84rem; padding: 11px 0; }
+
+  .order-cta { padding: 60px 18px; }
+  .order-cta h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .btn-dark, .btn-dark-outline { width: 100%; justify-content: center; padding: 15px 24px; }
+  .order-btns { flex-direction: column; }
+
+  .footer-main { grid-template-columns: 1fr; padding: 48px 18px 32px; gap: 28px; }
+  .footer-desc { max-width: 100%; }
+  .footer-bottom { padding: 14px 18px 28px; }
+
+  .float-btn { bottom: 16px; right: 14px; left: 14px; justify-content: center; font-size: 0.72rem; padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">Lincoln Park <span>Liquor</span></div>
+  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#delivery" class="mob-link">Delivery</a>
+  <a href="#spirits" class="mob-link">Spirits</a>
+  <a href="#shop" class="mob-link">Shop</a>
+  <a href="#hours" class="mob-link">Hours</a>
+  <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="mob-order-btn mob-link">Order Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Lincoln Park Food & Liquor<span>2427 N Clark St · Chicago</span></a>
+  <ul class="nav-links">
+    <li><a href="#delivery">Delivery</a></li>
+    <li><a href="#spirits">Spirits</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#hours">Hours</a></li>
+  </ul>
+  <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="nav-order-btn">Order Now →</a>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- DELIVERY BANNER -->
+<div class="delivery-banner">
+  <span class="db-text">🚚 We Deliver —</span>
+  <div class="db-pills">
+    <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="db-pill">DoorDash</a>
+    <a href="https://www.grubhub.com/restaurant/lincoln-park-food-and-liquor-2427-n-clark-st-chicago/2372044" target="_blank" class="db-pill">GrubHub</a>
+    <a href="#" class="db-pill">Uber Eats</a>
+  </div>
+</div>
+
+<!-- FLOAT BTN -->
+<a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="float-btn" id="floatBtn">
+  <span class="fdot"></span> Order Delivery
+</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div><span>Now Delivering to Your Door</span></div>
+    <h1>Your <em>Corner</em><br>Store,<br>Delivered.</h1>
+    <p class="hero-sub">Beer, wine, spirits, snacks & more — from our shelves to your door in under 30 minutes. Open late, every day.</p>
+    <div class="hero-actions">
+      <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="btn-amber">Order on DoorDash →</a>
+      <a href="#shop" class="btn-outline">Browse the Store</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">15+</div>
+      <div class="hero-stat-label">Years Serving<br>Lincoln Park</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">30<span style="font-size:1.4rem">min</span></div>
+      <div class="hero-stat-label">Average<br>Delivery Time</div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Beer & Seltzers <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Wine & Spirits <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Snacks & Essentials <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Tobacco & Essentials <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Lottery <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Open Until 1AM Fri & Sat <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Delivery Available Now <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Beer & Seltzers <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Wine & Spirits <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Snacks & Essentials <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Tobacco & Essentials <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Lottery <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Open Until 1AM Fri & Sat <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Delivery Available Now <span class="marquee-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- DELIVERY SECTION -->
+<section class="delivery-section" id="delivery">
+  <div class="delivery-inner">
+    <div class="delivery-top">
+      <div class="delivery-text reveal">
+        <div class="eyebrow">Delivery & Pickup</div>
+        <h2>Order Online.<br><em>We'll Handle the Rest.</em></h2>
+        <p>Skip the trip. Order beer, wine, liquor, snacks and more right from your phone and have it at your door in minutes. Available on multiple platforms — pick your favorite.</p>
+      </div>
+      <div class="delivery-platforms reveal reveal-delay-1">
+        <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="platform-card">
+          <div class="platform-info">
+            <div class="platform-icon dd">🍕</div>
+            <div>
+              <div class="platform-name">DoorDash</div>
+              <div class="platform-sub">Fast delivery · Track your order live</div>
+            </div>
+          </div>
+          <div class="platform-arrow">→</div>
+        </a>
+        <a href="https://www.grubhub.com/restaurant/lincoln-park-food-and-liquor-2427-n-clark-st-chicago/2372044" target="_blank" class="platform-card">
+          <div class="platform-info">
+            <div class="platform-icon gh">🛵</div>
+            <div>
+              <div class="platform-name">GrubHub</div>
+              <div class="platform-sub">Order delivery or schedule pickup</div>
+            </div>
+          </div>
+          <div class="platform-arrow">→</div>
+        </a>
+        <a href="#" class="platform-card">
+          <div class="platform-info">
+            <div class="platform-icon ue">🚗</div>
+            <div>
+              <div class="platform-name">Uber Eats</div>
+              <div class="platform-sub">Coming soon — stay tuned</div>
+            </div>
+          </div>
+          <div class="platform-arrow">→</div>
+        </a>
+      </div>
+    </div>
+    <div class="delivery-features">
+      <div class="delivery-feature reveal">
+        <div class="df-icon">⚡</div>
+        <div class="df-title">Fast Delivery</div>
+        <div class="df-desc">Most orders delivered in under 30 minutes. Real-time tracking so you know exactly when to answer the door.</div>
+      </div>
+      <div class="delivery-feature reveal reveal-delay-1">
+        <div class="df-icon">🌙</div>
+        <div class="df-title">Open Late</div>
+        <div class="df-desc">We're open until midnight on weekdays and 1AM on Friday & Saturday. Late night? We've got you covered.</div>
+      </div>
+      <div class="delivery-feature reveal reveal-delay-2">
+        <div class="df-icon">📍</div>
+        <div class="df-title">Local & Trusted</div>
+        <div class="df-desc">Serving Lincoln Park for over 15 years. A real neighborhood store — not a warehouse, not a chain.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM SPIRITS -->
+<section class="premium" id="spirits">
+  <div class="premium-inner">
+    <div class="premium-header reveal">
+      <div>
+        <div class="eyebrow-center" style="justify-content:flex-start;margin-bottom:12px">Premium Selection</div>
+        <h2>Top-Shelf <em>Spirits</em></h2>
+      </div>
+      <p>We carry a curated selection of premium and ultra-premium bottles across every category — stocked fresh, priced right.</p>
+    </div>
+    <div class="spirits-grid">
+      <div class="spirit-card reveal">
+        <span class="spirit-emoji">🥃</span>
+        <div class="spirit-name">Whiskey</div>
+        <div class="spirit-brands">
+          <strong>Featured Bottles</strong>
+          Johnnie Walker Black<br>
+          Jameson<br>
+          Maker's Mark<br>
+          Jack Daniel's<br>
+          Bulleit Bourbon
+        </div>
+      </div>
+      <div class="spirit-card reveal reveal-delay-1">
+        <span class="spirit-emoji">🍸</span>
+        <div class="spirit-name">Vodka</div>
+        <div class="spirit-brands">
+          <strong>Featured Bottles</strong>
+          Grey Goose<br>
+          Tito's<br>
+          Belvedere<br>
+          Ketel One<br>
+          Absolut
+        </div>
+      </div>
+      <div class="spirit-card reveal reveal-delay-2">
+        <span class="spirit-emoji">🌵</span>
+        <div class="spirit-name">Tequila</div>
+        <div class="spirit-brands">
+          <strong>Featured Bottles</strong>
+          Casamigos Blanco<br>
+          Don Julio 1942<br>
+          Patrón Silver<br>
+          Espolòn<br>
+          Herradura
+        </div>
+      </div>
+      <div class="spirit-card reveal reveal-delay-1">
+        <span class="spirit-emoji">🍹</span>
+        <div class="spirit-name">Rum & Gin</div>
+        <div class="spirit-brands">
+          <strong>Featured Bottles</strong>
+          Bacardi Superior<br>
+          Captain Morgan<br>
+          Hendrick's Gin<br>
+          Tanqueray<br>
+          Malibu
+        </div>
+      </div>
+      <div class="spirit-card reveal reveal-delay-2">
+        <span class="spirit-emoji">🍾</span>
+        <div class="spirit-name">Cognac &amp; Brandy</div>
+        <div class="spirit-brands">
+          <strong>Featured Bottles</strong>
+          Hennessy VS<br>
+          Rémy Martin VSOP<br>
+          D'Ussé VSOP<br>
+          Courvoisier<br>
+          Martell
+        </div>
+      </div>
+    </div>
+    <div class="premium-banner reveal">
+      <div class="premium-banner-text">🏆 Don't see your bottle? Come in — our selection is always growing. <span>We special order too.</span></div>
+      <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank">Order for Delivery →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="shop">
+  <div class="categories-header reveal">
+    <div class="eyebrow-center">What We Carry</div>
+    <h2>Everything You <em>Need</em></h2>
+    <p>Stocked daily. Available in-store and on delivery.</p>
+  </div>
+  <div class="cats-grid">
+    <div class="cat-card featured reveal">
+      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1000&q=80" alt="Liquor & Spirits">
+      <div class="cat-overlay">
+        <div class="cat-icon">🥃</div>
+        <div class="cat-name">Liquor & Spirits</div>
+        <div class="cat-count">Whiskey · Vodka · Rum · Tequila · Gin</div>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Beer & Seltzers">
+      <div class="cat-overlay">
+        <div class="cat-icon">🍺</div>
+        <div class="cat-name">Beer & Seltzers</div>
+        <div class="cat-count">Domestic · Craft · Import · Hard Seltzer</div>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&q=80" alt="Wine">
+      <div class="cat-overlay">
+        <div class="cat-icon">🍷</div>
+        <div class="cat-name">Wine</div>
+        <div class="cat-count">Red · White · Rosé · Sparkling</div>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80" alt="Snacks & Grocery">
+      <div class="cat-overlay">
+        <div class="cat-icon">🛒</div>
+        <div class="cat-name">Snacks & Grocery</div>
+        <div class="cat-count">Chips · Candy · Drinks · Essentials</div>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Tobacco & Essentials">
+      <div class="cat-overlay">
+        <div class="cat-icon">🎰</div>
+        <div class="cat-name">Tobacco & Essentials</div>
+        <div class="cat-count">Cigarettes · Cigars · Lottery · Drinks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<div class="why-us">
+  <div class="why-img reveal">
+    <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=900&q=80" alt="store interior">
+    <div class="why-img-badge">
+      <strong>Since<br>'09</strong>
+      <span>Lincoln Park</span>
+    </div>
+  </div>
+  <div class="why-text">
+    <div class="why-text-inner reveal reveal-delay-1">
+      <div class="eyebrow">Why Shop With Us</div>
+      <h2>Your Neighborhood<br><em>Corner Store</em></h2>
+      <p>We're not a chain. We're Lincoln Park's local liquor and convenience store — stocked with what you actually want, run by people who actually know you.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div class="why-item-text"><h4>Delivery on Multiple Platforms</h4><p>Order on DoorDash or GrubHub — fast, reliable, tracked in real time.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div class="why-item-text"><h4>Open Late Every Night</h4><p>Mon–Thu until midnight, Fri–Sat until 1AM. We're there when you need us.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div class="why-item-text"><h4>Huge Selection</h4><p>From craft beer to premium spirits, everyday essentials to vape — all under one roof.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div class="why-item-text"><h4>Walk In or Order Ahead</h4><p>In the neighborhood? Come in. Staying in? Order from the couch. Your call.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOURS & MAP -->
+<div class="hours-section" id="hours">
+  <div class="hours-left">
+    <div class="eyebrow">Find Us</div>
+    <h2>Hours &<br><em>Location</em></h2>
+    <div class="hours-table" id="hoursTable">
+      <div class="hours-row" data-day="Monday"><span class="hours-day">Monday</span><span class="hours-time">9:00 AM – 12:00 AM</span></div>
+      <div class="hours-row" data-day="Tuesday"><span class="hours-day">Tuesday</span><span class="hours-time">9:00 AM – 12:00 AM</span></div>
+      <div class="hours-row" data-day="Wednesday"><span class="hours-day">Wednesday</span><span class="hours-time">9:00 AM – 12:00 AM</span></div>
+      <div class="hours-row" data-day="Thursday"><span class="hours-day">Thursday</span><span class="hours-time">9:00 AM – 12:00 AM</span></div>
+      <div class="hours-row" data-day="Friday"><span class="hours-day">Friday</span><span class="hours-time">9:00 AM – 1:00 AM</span></div>
+      <div class="hours-row" data-day="Saturday"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM – 1:00 AM</span></div>
+      <div class="hours-row" data-day="Sunday"><span class="hours-day">Sunday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+    </div>
+    <div class="contact-pills">
+      <div class="contact-pill">📍 <a href="https://maps.google.com/?q=2427+N+Clark+St+Chicago" target="_blank">2427 N Clark St, Chicago, IL 60614</a></div>
+      <div class="contact-pill">🚚 <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank">Order on DoorDash</a></div>
+      <div class="contact-pill">🛵 <a href="https://www.grubhub.com/restaurant/lincoln-park-food-and-liquor-2427-n-clark-st-chicago/2372044" target="_blank">Order on GrubHub</a></div>
+    </div>
+  </div>
+  <div class="hours-right">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.4!2d-87.6437!3d41.9318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2d4f1234567%3A0x1!2s2427+N+Clark+St%2C+Chicago%2C+IL+60614!5e0!3m2!1sen!2sus!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+<!-- ORDER CTA -->
+<section class="order-cta">
+  <div class="reveal">
+    <h2>Ready to Order?<br><em>We're Ready.</em></h2>
+    <p>Choose your platform and get your order in minutes.</p>
+    <div class="order-btns">
+      <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="btn-dark"><span class="btn-icon">🍕</span> Order on DoorDash</a>
+      <a href="https://www.grubhub.com/restaurant/lincoln-park-food-and-liquor-2427-n-clark-st-chicago/2372044" target="_blank" class="btn-dark"><span class="btn-icon">🛵</span> Order on GrubHub</a>
+      <a href="https://maps.google.com/?q=2427+N+Clark+St+Chicago" target="_blank" class="btn-dark-outline">📍 Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-brand-name">Lincoln Park Food & Liquor</div>
+      <div class="footer-brand-sub">2427 N Clark St · Chicago, IL</div>
+      <p class="footer-desc">Your neighborhood corner store in the heart of Lincoln Park. Delivery available on DoorDash and GrubHub.</p>
+      <div class="footer-delivery-icons">
+        <a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank" class="fdi dd" title="DoorDash">🍕</a>
+        <a href="https://www.grubhub.com/restaurant/lincoln-park-food-and-liquor-2427-n-clark-st-chicago/2372044" target="_blank" class="fdi gh" title="GrubHub">🛵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#shop">Liquor & Spirits</a></li>
+        <li><a href="#shop">Beer & Seltzers</a></li>
+        <li><a href="#shop">Wine</a></li>
+        <li><a href="#shop">Snacks & Grocery</a></li>
+        <li><a href="#shop">Tobacco & Essentials</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit</h5>
+      <ul>
+        <li><a href="https://maps.google.com/?q=2427+N+Clark+St+Chicago" target="_blank">2427 N Clark St</a></li>
+        <li><a href="#hours">Store Hours</a></li>
+        <li><a href="https://www.doordash.com/en/convenience/store/lincoln-park-food-and-liquor-chicago-33772783/" target="_blank">Order Delivery</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Lincoln Park Food & Liquor · All Rights Reserved</span>
+    <span>Website by <a href="#">Corner Digital Group</a></span>
+  </div>
+</footer>
+
+<script>
+// ─── LOADER ───
+window.addEventListener('load', () => {
+  document.getElementById('loaderFill').style.width = '100%';
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1400);
+});
+
+// ─── NAV SCROLL ───
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('floatBtn').classList.toggle('visible', window.scrollY > 500);
+});
+
+// ─── HAMBURGER ───
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// ─── TODAY'S HOURS ───
+const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const today = days[new Date().getDay()];
+document.querySelectorAll('.hours-row').forEach(row => {
+  if (row.dataset.day === today) row.classList.add('today');
+});
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
