@@ -161,7 +161,7 @@ nav.solid { background: rgba(13,13,13,0.97); backdrop-filter: blur(20px); border
 .svc-price { display: flex; align-items: baseline; gap: 6px; margin-top: auto; }
 .svc-price-main { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--black); }
 .svc-price-sub { font-size: 0.78rem; color: var(--silver); letter-spacing: 1px; }
-.svc-badge { display: inline-block; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(198,150,58,0.1); color: var(--gold); border: 1px solid rgba(198,150,58,0.3); padding: 4px 10px; margin-bottom: 20px; }
+.svc-badge { display: inline-block; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(198,150,58,0.1); color: var(--gold); border: 1px solid rgba(198,150,58,0.3); padding: 4px 10px; margin-bottom: 12px; }
 
 /* ─── PROCESS ─── */
 .process { background: var(--black); padding: 120px 64px; }
@@ -420,7 +420,6 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
   <div class="services-cards">
     <div class="svc-card rv">
       <div class="svc-num">01</div>
-      <div class="svc-badge">Most Popular</div>
       <h3>Website Design & Build</h3>
       <p>A stunning, fast, mobile-optimized website built specifically for your business. You own it outright — no platform lock-in.</p>
       <ul class="svc-features">
@@ -437,26 +436,10 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
     </div>
     <div class="svc-card rv rv-d1">
       <div class="svc-num">02</div>
-      <h3>Local SEO & Google</h3>
-      <p>Get found when customers search for your services nearby. We set up and optimize your entire local search presence.</p>
-      <ul class="svc-features">
-        <li>Google Business Profile setup</li>
-        <li>"Near me" keyword optimization</li>
-        <li>Local citations & directories</li>
-        <li>Monthly ranking reports</li>
-        <li>Google Maps optimization</li>
-      </ul>
-      <div class="svc-price">
-        <span class="svc-price-main">Included</span>
-        <span class="svc-price-sub">in monthly plan</span>
-      </div>
-    </div>
-    <div class="svc-card rv rv-d2">
-      <div class="svc-num">03</div>
       <h3>Monthly Care Plan</h3>
       <p>We handle hosting, updates, security, and SEO maintenance every month so you never have to think about your website again.</p>
       <ul class="svc-features">
-        <li>Secure hosting & backups</li>
+        <li>Secure hosting & daily backups</li>
         <li>Content updates on request</li>
         <li>Ongoing SEO maintenance</li>
         <li>Monthly performance report</li>
@@ -465,6 +448,22 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
       <div class="svc-price">
         <span class="svc-price-main">from $129</span>
         <span class="svc-price-sub">per month</span>
+      </div>
+    </div>
+    <div class="svc-card rv rv-d2">
+      <div class="svc-num">03</div>
+      <h3>Local SEO & Google</h3>
+      <p>Get found when customers search for your services nearby. We set up and optimize your entire local search presence.</p>
+      <ul class="svc-features">
+        <li>Google Business Profile setup</li>
+        <li>"Near me" keyword optimization</li>
+        <li>Local citations & directories</li>
+        <li>Google Maps optimization</li>
+        <li>Monthly ranking reports</li>
+      </ul>
+      <div class="svc-price">
+        <span class="svc-price-main">Included</span>
+        <span class="svc-price-sub">with Growth & Premium plans</span>
       </div>
     </div>
   </div>
@@ -557,15 +556,15 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
         <div class="price-name">Starter</div>
         <div class="price-amount">$599</div>
         <div class="price-period">one-time build</div>
-        <div class="price-monthly">+ $129 / month</div>
+        <div class="price-monthly">+ $129 / month care plan</div>
         <ul class="price-features">
           <li>5-page custom website</li>
-          <li>Mobile-first design</li>
+          <li>Mobile-first responsive design</li>
           <li>Contact form + click-to-call</li>
           <li>On-page SEO (titles, meta, schema)</li>
-          <li>WordPress hosting included</li>
+          <li>Hosting, backups & security</li>
+          <li>Content updates on request</li>
           <li>You own the site — forever</li>
-          <li>2-week turnaround</li>
         </ul>
         <a href="#contact" class="price-btn">Get Started</a>
       </div>
@@ -574,15 +573,15 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
         <div class="price-name">Growth</div>
         <div class="price-amount" style="color:white">$999</div>
         <div class="price-period" style="color:rgba(255,255,255,0.4)">one-time build</div>
-        <div class="price-monthly">+ $179 / month</div>
+        <div class="price-monthly">+ $179 / month care plan</div>
         <ul class="price-features">
           <li>Everything in Starter</li>
           <li>Up to 10 pages</li>
           <li>Google Business Profile setup</li>
           <li>Listed on Yelp, Bing & Apple Maps</li>
           <li>Booking / reservation integration</li>
-          <li>Monthly site updates</li>
-          <li>Analytics & reporting</li>
+          <li>Local SEO & Google Maps optimization</li>
+          <li>Monthly analytics & reporting</li>
         </ul>
         <a href="#contact" class="price-btn">Get Started</a>
       </div>
@@ -590,15 +589,15 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
         <div class="price-name">Premium</div>
         <div class="price-amount">$1,499</div>
         <div class="price-period">one-time build</div>
-        <div class="price-monthly">+ $249 / month</div>
+        <div class="price-monthly">+ $249 / month care plan</div>
         <ul class="price-features">
           <li>Everything in Growth</li>
           <li>Unlimited pages</li>
-          <li>Monthly SEO content (blog post)</li>
+          <li>Monthly SEO blog content</li>
           <li>Review monitoring & response</li>
           <li>Google ranking progress reports</li>
           <li>E-commerce / online store</li>
-          <li>Priority support & updates</li>
+          <li>Priority support & same-day updates</li>
         </ul>
         <a href="#contact" class="price-btn">Get Started</a>
       </div>
@@ -681,8 +680,8 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
       <h5>Services</h5>
       <ul>
         <li><a href="#services">Website Design</a></li>
-        <li><a href="#services">Local SEO</a></li>
-        <li><a href="#services">Monthly Care</a></li>
+        <li><a href="#services">Monthly Care Plan</a></li>
+        <li><a href="#services">Local SEO & Google</a></li>
         <li><a href="#pricing">Pricing</a></li>
       </ul>
     </div>
