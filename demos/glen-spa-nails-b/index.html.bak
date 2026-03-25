@@ -168,7 +168,7 @@ footer span{color:#e75480}
   </div>
   <div class="hours-right">
     <h2>Location</h2>
-    <iframe src="https://maps.google.com/maps?q=Glenview,+IL+60025&output=embed" allowfullscreen loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=Glenview,IL+60025" allowfullscreen loading="lazy"></iframe>
   </div>
 </section>
 

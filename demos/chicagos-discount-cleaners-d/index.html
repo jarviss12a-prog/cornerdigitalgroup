@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicago's Discount Cleaners — The Art of Garment Care | Lincoln Park, Chicago</title>
+<meta name="description" content="Master dry cleaning & bespoke tailoring in Lincoln Park, Chicago. Family-owned atelier delivering exceptional garment care since day one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=General+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CHICAGO'S DISCOUNT CLEANERS — DESIGN D: ATELIER
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #0a0a0a;
+  --charcoal-1: #111111;
+  --charcoal-2: #141414;
+  --charcoal-3: #1a1a1a;
+  --charcoal-4: #222222;
+  --gold: #c9a96e;
+  --gold-dim: rgba(201, 169, 110, 0.15);
+  --gold-glow: rgba(201, 169, 110, 0.08);
+  --white: #f5f2ed;
+  --white-dim: rgba(245, 242, 237, 0.6);
+  --white-muted: rgba(245, 242, 237, 0.35);
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'General Sans', -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Custom cursor */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease;
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201,169,110,0.4);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transition: transform 0.08s ease, width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+/* Grain overlay */
+.grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Selection */
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.5s ease, padding 0.4s ease, backdrop-filter 0.5s ease;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 18px 48px;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+}
+
+.nav-wordmark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-mobile-toggle span {
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.3s ease;
+}
+
+.nav-mobile-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+.nav-mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-mobile-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* Fabric texture background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(201, 169, 110, 0.02) 0%, transparent 60%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 100px,
+      rgba(245, 242, 237, 0.008) 100px,
+      rgba(245, 242, 237, 0.008) 101px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 100px,
+      rgba(245, 242, 237, 0.008) 100px,
+      rgba(245, 242, 237, 0.008) 101px
+    );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 0 24px;
+}
+
+.hero-needle {
+  width: 60px;
+  height: auto;
+  margin: 0 auto 48px;
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.3s forwards;
+}
+
+.hero-needle svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.hero h1 .word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: slideUp 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.hero h1 .word-inner.d1 { animation-delay: 0.5s; }
+.hero h1 .word-inner.d2 { animation-delay: 0.65s; }
+.hero h1 .word-inner.d3 { animation-delay: 0.8s; }
+.hero h1 .word-inner.d4 { animation-delay: 0.95s; }
+.hero h1 .word-inner.d5 { animation-delay: 1.1s; }
+
+.hero-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  font-weight: 300;
+  color: var(--white-dim);
+  letter-spacing: 0.08em;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeInUp 1s ease 1.4s forwards;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 18px 48px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeInUp 1s ease 1.7s forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gold);
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+.hero-cta:hover {
+  color: var(--black);
+}
+
+.hero-cta:hover::before {
+  left: 0;
+}
+
+/* Animated gold line */
+.hero-line {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  opacity: 0;
+  animation: fadeIn 1s ease 2.2s forwards, floatLine 3s ease-in-out 2.2s infinite;
+  z-index: 2;
+}
+
+/* Hero scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+  writing-mode: vertical-rl;
+  opacity: 0;
+  animation: fadeIn 1s ease 2.5s forwards;
+}
+
+/* ============================================
+   PHILOSOPHY STRIP
+   ============================================ */
+
+.philosophy {
+  background: var(--charcoal-2);
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy::before,
+.philosophy::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.philosophy::before { top: 0; }
+.philosophy::after { bottom: 0; }
+
+.philosophy blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--gold);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ============================================
+   SECTION UTILITIES
+   ============================================ */
+
+.section-gold-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto;
+}
+
+/* ============================================
+   SERVICES — EDITORIAL LAYOUT
+   ============================================ */
+
+.services {
+  background: var(--black);
+  position: relative;
+}
+
+.services-header {
+  text-align: center;
+  padding: 140px 24px 80px;
+}
+
+.services-header h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.services-header p {
+  font-size: 1rem;
+  color: var(--white-muted);
+  letter-spacing: 0.06em;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.service-item {
+  padding: 80px 48px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  border-bottom: 1px solid rgba(245, 242, 237, 0.04);
+  position: relative;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-number {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--gold-dim);
+  font-weight: 400;
+  line-height: 1;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.service-content {
+  flex: 1;
+}
+
+.service-content h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.service-content p {
+  font-size: 1rem;
+  color: var(--white-dim);
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+.service-accent {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.service-item:hover .service-accent {
+  opacity: 1;
+}
+
+/* Alternating service bgs */
+.service-item:nth-child(even) {
+  background: var(--charcoal-2);
+  max-width: 100%;
+  padding-left: calc((100% - 1200px) / 2 + 48px);
+  padding-right: calc((100% - 1200px) / 2 + 48px);
+}
+
+/* ============================================
+   CRAFT / PROCESS SECTION
+   ============================================ */
+
+.craft {
+  background: var(--charcoal-3);
+  padding: 140px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.craft::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.craft-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.craft-header h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.craft-header p {
+  color: var(--white-muted);
+  letter-spacing: 0.06em;
+}
+
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Gold connecting line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), var(--gold), transparent);
+}
+
+.timeline-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 24px;
+  position: relative;
+}
+
+.timeline-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 28px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--charcoal-3);
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.timeline-step h4 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.timeline-step p {
+  font-size: 0.85rem;
+  color: var(--white-muted);
+  line-height: 1.6;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+
+.about {
+  background: var(--black);
+  padding: 160px 48px;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.about-left {
+  flex: 1;
+}
+
+.about-left h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--white);
+}
+
+.about-left h2 span {
+  display: block;
+}
+
+.about-divider {
+  width: 1px;
+  height: 200px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.about-right {
+  flex: 1;
+}
+
+.about-right p {
+  font-size: 1.05rem;
+  color: var(--white-dim);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.about-right .about-since {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+/* Needle SVG motif */
+.about-needle {
+  position: absolute;
+  right: 5%;
+  top: 60px;
+  width: 120px;
+  opacity: 0.06;
+}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+
+.testimonials {
+  background: var(--charcoal-2);
+  padding: 140px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials::before,
+.testimonials::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+.testimonials::before { top: 0; }
+.testimonials::after { bottom: 0; }
+
+.testimonial-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 60px;
+  display: block;
+}
+
+.testimonial-slider {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 200px;
+}
+
+.testimonial-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.testimonial-slide.active {
+  opacity: 1;
+}
+
+.testimonial-slide blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  color: var(--white);
+  line-height: 1.6;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.testimonial-slide cite {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--white-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.testimonial-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--white-muted);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.testimonial-dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+
+/* ============================================
+   VISIT / CONTACT
+   ============================================ */
+
+.visit {
+  background: var(--black);
+  padding: 140px 48px;
+  position: relative;
+}
+
+.visit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.visit-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.visit-header h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.visit-header p {
+  color: var(--white-muted);
+  letter-spacing: 0.06em;
+}
+
+.visit-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 60px;
+  align-items: stretch;
+}
+
+.visit-map {
+  flex: 1.2;
+  min-height: 420px;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.visit-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) brightness(0.4) contrast(1.1);
+  position: absolute;
+  inset: 0;
+}
+
+.visit-info {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.visit-info-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.visit-hours table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 48px;
+}
+
+.visit-hours td {
+  font-size: 0.95rem;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(245, 242, 237, 0.04);
+  color: var(--white-dim);
+}
+
+.visit-hours td:first-child {
+  color: var(--white);
+  font-weight: 400;
+  width: 55%;
+}
+
+.visit-hours tr:last-child td {
+  border-bottom: none;
+}
+
+.visit-hours tr.closed td {
+  color: var(--white-muted);
+}
+
+.visit-address {
+  margin-bottom: 12px;
+}
+
+.visit-address p {
+  font-size: 0.95rem;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+
+.visit-phone {
+  margin-bottom: 40px;
+}
+
+.visit-phone a {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--white);
+  transition: color 0.3s ease;
+  letter-spacing: 0.04em;
+}
+
+.visit-phone a:hover {
+  color: var(--gold);
+}
+
+.visit-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.visit-btn:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background: var(--charcoal-2);
+  padding: 80px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.footer-wordmark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.footer-info {
+  font-size: 0.85rem;
+  color: var(--white-muted);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.footer-info a {
+  transition: color 0.3s;
+}
+
+.footer-info a:hover {
+  color: var(--gold);
+}
+
+.footer-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+}
+
+.footer-credit {
+  font-size: 0.7rem;
+  color: var(--white-muted);
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes floatLine {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-12px); }
+}
+
+@keyframes stitch {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.97);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--white);
+  transition: color 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .service-item:nth-child(even) {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-inner {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .about-divider {
+    width: 60px;
+    height: 1px;
+  }
+
+  .about-left {
+    text-align: center;
+  }
+
+  .visit-inner {
+    flex-direction: column;
+  }
+
+  .visit-map {
+    min-height: 320px;
+  }
+
+  .timeline {
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .timeline::before {
+    top: 32px;
+    left: 50%;
+    right: auto;
+    width: 1px;
+    height: calc(100% - 64px);
+  }
+
+  .timeline-step {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 20px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: flex; }
+
+  .service-item {
+    flex-direction: column;
+    gap: 16px;
+    padding: 60px 24px;
+  }
+
+  .service-item:nth-child(even) {
+    padding: 60px 24px;
+  }
+
+  .service-number {
+    min-width: auto;
+    font-size: 2.5rem;
+  }
+
+  .service-accent { display: none; }
+
+  .about { padding: 120px 24px; }
+  .visit { padding: 120px 24px; }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-sub { font-size: 0.85rem; }
+  .hero-cta { padding: 14px 32px; font-size: 0.7rem; }
+  .services-header { padding: 100px 24px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Grain overlay -->
+<div class="grain"></div>
+
+<!-- Custom cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-wordmark">Chicago's</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#visit">Visit</a></li>
+    <li><a href="tel:+17735496746">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-toggle" id="menuToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#visit" onclick="closeMobileMenu()">Visit</a>
+  <a href="tel:+17735496746" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <!-- Needle & Thread SVG Motif -->
+    <div class="hero-needle">
+      <svg viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="0" x2="30" y2="70" stroke="#c9a96e" stroke-width="1"/>
+        <polygon points="24,70 30,100 36,70" fill="none" stroke="#c9a96e" stroke-width="1"/>
+        <path d="M30 10 Q45 25 30 40 Q15 55 30 70" fill="none" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5">
+          <animate attributeName="stroke-dashoffset" from="200" to="0" dur="4s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+
+    <h1>
+      <span class="word"><span class="word-inner d1">The</span></span>
+      <span class="word"><span class="word-inner d2">Art</span></span>
+      <span class="word"><span class="word-inner d3">of</span></span><br>
+      <span class="word"><span class="word-inner d4">Garment</span></span>
+      <span class="word"><span class="word-inner d5">Care</span></span>
+    </h1>
+
+    <p class="hero-sub">Expert dry cleaning &amp; alterations. Lincoln Park, Chicago.</p>
+
+    <a href="#services" class="hero-cta">Discover Our Craft</a>
+  </div>
+
+  <div class="hero-line"></div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- PHILOSOPHY STRIP -->
+<section class="philosophy">
+  <blockquote class="reveal">
+    "Every garment tells a story.<br>We ensure it's preserved beautifully."
+  </blockquote>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <h2 class="reveal">Our Services</h2>
+    <p class="reveal reveal-delay-1">Meticulous care for every fabric, every detail.</p>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">01</div>
+    <div class="service-content">
+      <h3>Dry Cleaning</h3>
+      <p>Suits, dresses, coats, and delicates — treated with the precision and care of a master atelier. We inspect every seam, every button, every fiber to deliver garments that look and feel renewed.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">02</div>
+    <div class="service-content">
+      <h3>Expert Tailoring &amp; Alterations</h3>
+      <p>From a perfect hem to a complete transformation, our skilled tailors bring decades of experience to every stitch. Bespoke alterations that honor the original craftsmanship of your garments.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">03</div>
+    <div class="service-content">
+      <h3>Bridal Gown Preservation</h3>
+      <p>Your gown deserves to last as long as the memory. Expert cleaning and museum-quality preservation ensure your wedding dress remains flawless for generations to come.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">04</div>
+    <div class="service-content">
+      <h3>Leather &amp; Suede Care</h3>
+      <p>Specialized treatment for the most demanding materials. We restore, condition, and protect leather and suede pieces with artisan-grade techniques and premium products.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">05</div>
+    <div class="service-content">
+      <h3>Shirt Laundering</h3>
+      <p>Crisp, immaculate, and perfectly pressed. Every shirt is hand-finished to exacting standards — because the details define the gentleman.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+
+  <div class="service-item reveal">
+    <div class="service-number">06</div>
+    <div class="service-content">
+      <h3>Household &amp; Specialty Items</h3>
+      <p>Curtains, comforters, tablecloths, and fine linens. We extend the same meticulous care to your home textiles — because craft has no boundaries.</p>
+    </div>
+    <div class="service-accent"></div>
+  </div>
+</section>
+
+<!-- CRAFT / PROCESS -->
+<section class="craft" id="craft">
+  <div class="craft-header">
+    <h2 class="reveal">Our Process</h2>
+    <p class="reveal reveal-delay-1">Four steps. Uncompromising quality.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-step reveal reveal-delay-1">
+      <div class="timeline-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M16.36 16.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M16.36 7.64l1.42-1.42"/></svg>
+      </div>
+      <h4>Inspect</h4>
+      <p>Every garment is examined for stains, fabric type, and special care needs.</p>
+    </div>
+
+    <div class="timeline-step reveal reveal-delay-2">
+      <div class="timeline-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+      </div>
+      <h4>Clean</h4>
+      <p>Premium solvents and eco-friendly methods tailored to each fabric's requirements.</p>
+    </div>
+
+    <div class="timeline-step reveal reveal-delay-3">
+      <div class="timeline-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h4>Press</h4>
+      <p>Hand-pressed to perfection with precision equipment and decades of expertise.</p>
+    </div>
+
+    <div class="timeline-step reveal reveal-delay-4">
+      <div class="timeline-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h4>Perfect</h4>
+      <p>Final quality check ensures every detail meets our exacting standards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <!-- Decorative needle -->
+  <div class="about-needle">
+    <svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="0" x2="30" y2="140" stroke="#c9a96e" stroke-width="1.5"/>
+      <polygon points="22,140 30,190 38,140" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <circle cx="30" cy="12" r="4" fill="none" stroke="#c9a96e" stroke-width="1"/>
+      <path d="M30 20 Q55 50 30 80 Q5 110 30 140" fill="none" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="6 4" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <div class="about-inner">
+    <div class="about-left reveal-left">
+      <h2>
+        <span>Family.</span>
+        <span>Craft.</span>
+        <span>Legacy.</span>
+      </h2>
+    </div>
+
+    <div class="about-divider reveal"></div>
+
+    <div class="about-right reveal-right">
+      <p>Nestled in the heart of Lincoln Park, Chicago's Discount Cleaners is more than a business — it's a family tradition built on an unwavering commitment to quality. Every garment that passes through our doors receives the same meticulous attention we'd give our own.</p>
+      <p>With decades of experience in fabric care and bespoke tailoring, we've earned the trust of Chicago's most discerning clientele. Same-day service, eco-friendly options, and expert craftsmanship — this is garment care, elevated.</p>
+      <span class="about-since">★ 4.4 Stars — 16 Google Reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <span class="testimonial-label reveal">What Our Clients Say</span>
+
+  <div class="testimonial-slider">
+    <div class="testimonial-slide active">
+      <blockquote>"I wouldn't trust anyone else with my suits. Chicago's Discount Cleaners treats every piece like it's couture. Absolutely impeccable work."</blockquote>
+      <cite>Michael R. — Lincoln Park</cite>
+    </div>
+    <div class="testimonial-slide">
+      <blockquote>"They saved my grandmother's vintage wedding dress. The preservation work was museum-quality. I can't recommend them enough."</blockquote>
+      <cite>Sarah K. — Lakeview</cite>
+    </div>
+    <div class="testimonial-slide">
+      <blockquote>"The tailoring is exceptional. Every alteration fits like it was custom-made from scratch. True artisans at work."</blockquote>
+      <cite>David L. — Gold Coast</cite>
+    </div>
+  </div>
+
+  <div class="testimonial-dots">
+    <div class="testimonial-dot active" data-index="0"></div>
+    <div class="testimonial-dot" data-index="1"></div>
+    <div class="testimonial-dot" data-index="2"></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="visit-header">
+    <h2 class="reveal">Visit Our Atelier</h2>
+    <p class="reveal reveal-delay-1">We look forward to caring for your finest garments.</p>
+  </div>
+
+  <div class="visit-inner">
+    <div class="visit-map reveal-left">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5!2d-87.6576!3d41.9292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2d34f5e1b9d%3A0x0!2s1333+W+Fullerton+Ave%2C+Chicago%2C+IL+60614!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Chicago's Discount Cleaners Location">
+      </iframe>
+    </div>
+
+    <div class="visit-info reveal-right">
+      <span class="visit-info-label">Hours</span>
+      <div class="visit-hours">
+        <table>
+          <tr><td>Monday – Friday</td><td>7:00 AM – 7:00 PM</td></tr>
+          <tr><td>Saturday</td><td>8:00 AM – 6:00 PM</td></tr>
+          <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
+        </table>
+      </div>
+
+      <span class="visit-info-label">Location</span>
+      <div class="visit-address">
+        <p>1333 W Fullerton Ave<br>Chicago, IL 60614<br>Lincoln Park</p>
+      </div>
+
+      <div class="visit-phone">
+        <a href="tel:+17735496746">(773) 549-6746</a>
+      </div>
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=1333+W+Fullerton+Ave+Chicago+IL+60614" target="_blank" rel="noopener" class="visit-btn">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-wordmark">Chicago's</div>
+  <div class="footer-info">
+    1333 W Fullerton Ave, Chicago, IL 60614<br>
+    <a href="tel:+17735496746">(773) 549-6746</a>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="footer-credit">Website crafted by Corner Digital Group</div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+
+  function handleNavScroll() {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 60);
+    lastScroll = y;
+  }
+
+  // ── CUSTOM CURSOR ──
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  let mouseX = -100, mouseY = -100;
+  let ringX = -100, ringY = -100;
+
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = 'translate(' + (mouseX - 4) + 'px, ' + (mouseY - 4) + 'px)';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.transform = 'translate(' + (ringX - 18) + 'px, ' + (ringY - 18) + 'px)';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover effects for links
+  document.querySelectorAll('a, button, .testimonial-dot').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      ring.style.width = '52px';
+      ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(201,169,110,0.7)';
+    });
+    el.addEventListener('mouseleave', function() {
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(201,169,110,0.4)';
+    });
+  });
+
+  // ── MOBILE MENU ──
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuToggle.addEventListener('click', function() {
+    menuToggle.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  window.closeMobileMenu = function() {
+    menuToggle.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  // ── SCROLL REVEAL ──
+  function createObserver(selector, threshold) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: threshold || 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach(function(el) { observer.observe(el); });
+  }
+
+  createObserver('.reveal', 0.15);
+  createObserver('.reveal-left', 0.15);
+  createObserver('.reveal-right', 0.15);
+
+  // ── TESTIMONIAL SLIDER ──
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  let currentSlide = 0;
+  let autoPlayTimer;
+
+  function showSlide(index) {
+    slides.forEach(function(s) { s.classList.remove('active'); });
+    dots.forEach(function(d) { d.classList.remove('active'); });
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    showSlide((currentSlide + 1) % slides.length);
+  }
+
+  function startAutoPlay() {
+    autoPlayTimer = setInterval(nextSlide, 5000);
+  }
+
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() {
+      clearInterval(autoPlayTimer);
+      showSlide(parseInt(this.dataset.index));
+      startAutoPlay();
+    });
+  });
+
+  startAutoPlay();
+
+  // ── PARALLAX ELEMENTS ──
+  function handleParallax() {
+    const scrollY = window.scrollY;
+    const heroLine = document.querySelector('.hero-line');
+    if (heroLine) {
+      heroLine.style.opacity = Math.max(0, 1 - scrollY / 600);
+    }
+    const heroScroll = document.querySelector('.hero-scroll');
+    if (heroScroll) {
+      heroScroll.style.opacity = Math.max(0, 1 - scrollY / 400);
+    }
+  }
+
+  // ── SCROLL LISTENER ──
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        handleNavScroll();
+        handleParallax();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // ── SMOOTH SCROLL FOR NAV LINKS ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = nav.offsetHeight + 20;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
+

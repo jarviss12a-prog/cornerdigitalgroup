@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blooming Nails & Spa — Glenview, IL</title>
+<title>Tres Bien Nail Salon — Glenview, IL</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -52,7 +52,7 @@ footer{background:#2a1a1a;color:#c8a0a0;text-align:center;padding:2rem;font-size
 </head>
 <body>
 <nav>
-  <a href="#" class="nav-logo">Blooming Nails & Spa 🌸</a>
+  <a href="#" class="nav-logo">Tres Bien Nail Salon 🌸</a>
   <button class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -90,7 +90,7 @@ footer{background:#2a1a1a;color:#c8a0a0;text-align:center;padding:2rem;font-size
     <div class="section-deco">🌺</div>
     <h2 class="section-title">A Little About Us</h2>
     <div class="about-wrap">
-      <p>Blooming Nails & Spa has been a beloved part of the Glenview community, offering beautiful nail services in a friendly and relaxing atmosphere. Every client who walks through our doors leaves feeling pampered, confident, and cared for.</p>
+      <p>Tres Bien Nail Salon has been a beloved part of the Glenview community, offering beautiful nail services in a friendly and relaxing atmosphere. Every client who walks through our doors leaves feeling pampered, confident, and cared for.</p>
       <p>Find us at 1362 Patriot Blvd — free parking, walk-ins welcome, and smiles guaranteed.</p>
       <br><a href="#book" class="btn">Book Your Visit</a>
     </div>
@@ -101,9 +101,9 @@ footer{background:#2a1a1a;color:#c8a0a0;text-align:center;padding:2rem;font-size
     <div class="section-deco">🌸</div>
     <h2 class="section-title">Hours</h2>
     <table class="hours-table">
-      <tr><td>Monday – Friday</td><td>9:00 AM – 7:00 PM</td></tr>
+      <tr><td>Monday – Friday</td><td>9:30 AM – 7:00 PM</td></tr>
       <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
-      <tr><td>Sunday</td><td>Closed</td></tr>
+      <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
     </table>
   </div>
 </section>
@@ -113,15 +113,15 @@ footer{background:#2a1a1a;color:#c8a0a0;text-align:center;padding:2rem;font-size
     <h2 class="section-title">Visit Us</h2>
     <div class="contact-grid">
       <div class="contact-info">
-        <p>📍 979 Waukegan Rd #G, Glenview, IL 60025</p>
-        <p>📞 <a href="tel:8477297870">(847) 729-7870</a></p>
+        <p>📍 2737 Pfingsten Rd, Glenview, IL 60026</p>
+        <p>📞 <a href="tel:8475629004">(847) 562-9004</a></p>
         <p style="margin-top:1rem">Walk-ins welcome · Free parking</p>
         <br><a href="#book" class="btn">Book Appointment</a>
       </div>
-      <div><iframe src="https://maps.google.com/maps?q=Blooming+Nails,+Glenview,+IL&output=embed" allowfullscreen loading="lazy"></iframe></div>
+      <div><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=1362+Patriot+Blvd,Glenview,IL+60026" allowfullscreen loading="lazy"></iframe></div>
     </div>
   </div>
 </section>
-<footer><p>© 2025 Blooming Nails & Spa 🌸 All rights reserved · 979 Waukegan Rd #G, Glenview, IL</p></footer>
+<footer><p>© 2025 Tres Bien Nail Salon 🌸 All rights reserved · 2737 Pfingsten Rd, Glenview, IL</p></footer>
 </body>
 </html>

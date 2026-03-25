@@ -137,7 +137,7 @@ footer span{color:var(--accent)}
         <a href="#book" class="btn">Book Appointment</a>
       </div>
       <div>
-        <iframe src="https://maps.google.com/maps?q=Tres+Bien+Nail+Salon,+Glenview,+IL&output=embed" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=1362+Patriot+Blvd,Glenview,IL+60026" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </div>

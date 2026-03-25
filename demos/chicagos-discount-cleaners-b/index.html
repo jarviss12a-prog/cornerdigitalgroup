@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicago's Discount Cleaners — Premium Dry Cleaning & Alterations</title>
+  <meta name="description" content="Chicago's Discount Cleaners at 1333 W Fullerton Ave. Premium dry cleaning, laundry, and alterations in Lincoln Park." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1a1a2e;
+      --surface: #16213e;
+      --surface2: #0f3460;
+      --border: #1e3a5f;
+      --accent: #00b4d8;
+      --accent2: #0096c7;
+      --text: #f0f4f8;
+      --muted: #8899aa;
+      --teal-muted: rgba(0,180,216,0.15);
+      --radius: 0.5rem;
+      --font-head: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--accent); color: #001a2e;
+      text-align: center; padding: 0.5rem 1rem;
+      font-size: 0.82rem; font-weight: 600; font-family: var(--font-head);
+      letter-spacing: 0.02em;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 2rem;
+      padding: 0 1.5rem; height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-head); font-size: 1.2rem; font-weight: 700;
+      color: var(--text); text-decoration: none; white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-search {
+      display: flex; align-items: center;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 0.4rem; overflow: hidden;
+      max-width: 480px; width: 100%;
+    }
+    .nav-search input {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--text); padding: 0.55rem 1rem;
+      font-size: 0.88rem; font-family: var(--font-body);
+    }
+    .nav-search input::placeholder { color: var(--muted); }
+    .nav-actions { display: flex; align-items: center; gap: 1rem; }
+    .nav-call {
+      background: var(--accent); color: #001a2e;
+      border: none; border-radius: 0.4rem;
+      padding: 0.55rem 1.2rem; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; font-family: var(--font-head);
+      transition: background 150ms; white-space: nowrap;
+    }
+    .nav-call:hover { background: var(--accent2); }
+
+    /* NAV SECONDARY */
+    .nav-secondary {
+      background: #14192e;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-sec-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; gap: 0; padding: 0 1.5rem; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-sec-inner::-webkit-scrollbar { display: none; }
+    .nav-sec-link {
+      color: var(--muted); text-decoration: none; font-size: 0.82rem;
+      font-weight: 500; padding: 0.65rem 1rem; white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: color 150ms, border-color 150ms;
+    }
+    .nav-sec-link:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      position: relative; overflow: hidden; min-height: 520px;
+      display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(26,26,46,0.95) 40%, rgba(26,26,46,0.3) 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1280px; margin: 0 auto; padding: 5rem 1.5rem;
+      width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--accent); color: #001a2e;
+      border-radius: 0.25rem; padding: 0.3rem 0.75rem;
+      font-size: 0.75rem; font-weight: 700; font-family: var(--font-head);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--font-head); font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
+      max-width: 600px; margin-bottom: 1.25rem;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero p {
+      color: rgba(240,244,248,0.7); font-size: 1rem; line-height: 1.7;
+      max-width: 480px; margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-teal {
+      background: var(--accent); color: #001a2e;
+      padding: 0.9rem 2rem; border-radius: 0.4rem;
+      font-size: 0.95rem; font-weight: 700; font-family: var(--font-head);
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 150ms, transform 100ms; display: inline-block;
+    }
+    .btn-teal:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 0.9rem 2rem; border-radius: 0.4rem;
+      font-size: 0.95rem; font-weight: 600; font-family: var(--font-head);
+      text-decoration: none; cursor: pointer;
+      transition: border-color 150ms, background 150ms; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(255,255,255,0.04); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--surface); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 1.25rem 1.5rem;
+    }
+    .trust-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.65rem;
+      font-size: 0.85rem; font-weight: 500; color: rgba(240,244,248,0.65);
+    }
+    .trust-item i { color: var(--accent); }
+
+    /* MAIN LAYOUT */
+    .main-layout {
+      max-width: 1280px; margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid; grid-template-columns: 230px 1fr; gap: 2rem;
+    }
+
+    /* SIDEBAR */
+    .sidebar { }
+    .sidebar-section { margin-bottom: 1.5rem; }
+    .sidebar-title {
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+      padding: 0 0 0.75rem; border-bottom: 1px solid var(--border);
+      margin-bottom: 0.75rem;
+    }
+    .sidebar-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.55rem 0.75rem; border-radius: 0.35rem;
+      text-decoration: none; color: rgba(240,244,248,0.65);
+      font-size: 0.88rem; transition: background 150ms, color 150ms;
+    }
+    .sidebar-link:hover { background: var(--surface2); color: var(--text); }
+    .sidebar-link.active { background: var(--teal-muted); color: var(--accent); font-weight: 600; }
+    .sidebar-promo {
+      background: var(--teal-muted); border: 1px solid rgba(0,180,216,0.2);
+      border-radius: var(--radius); padding: 1.25rem; text-align: center;
+    }
+    .sidebar-promo-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.35rem; }
+    .sidebar-promo p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+    .sidebar-promo a {
+      display: block; background: var(--accent); color: #001a2e;
+      text-decoration: none; padding: 0.6rem; border-radius: 0.35rem;
+      font-size: 0.82rem; font-weight: 700; font-family: var(--font-head);
+      transition: background 150ms;
+    }
+    .sidebar-promo a:hover { background: var(--accent2); }
+
+    /* CONTENT AREA */
+    .content { min-width: 0; }
+    .content-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .content-header h2 {
+      font-family: var(--font-head); font-size: 1.35rem; font-weight: 700;
+    }
+    .content-tabs { display: flex; gap: 0.5rem; }
+    .tab-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); padding: 0.45rem 1rem;
+      border-radius: 0.35rem; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; font-family: var(--font-head); transition: all 150ms;
+    }
+    .tab-btn.active, .tab-btn:hover { background: var(--accent); color: #001a2e; border-color: var(--accent); }
+
+    /* PRODUCT/SERVICE GRID */
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem;
+    }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color 200ms, transform 200ms;
+    }
+    .product-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .product-img-wrap {
+      position: relative; aspect-ratio: 1; background: var(--surface2); overflow: hidden;
+    }
+    .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 300ms; }
+    .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+    .p-badge {
+      position: absolute; top: 0.6rem; right: 0.6rem;
+      background: #059669; color: white;
+      font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem; font-family: var(--font-head); text-transform: uppercase;
+    }
+    .p-badge.popular { background: var(--accent); color: #001a2e; }
+    .p-body { padding: 1rem; }
+    .p-brand { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.3rem; }
+    .p-name { font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; }
+    .p-spec { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.85rem; line-height: 1.5; }
+    .p-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .p-price { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--accent); }
+    .p-btn {
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border); border-radius: 0.35rem;
+      padding: 0.45rem 0.85rem; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; font-family: var(--font-head);
+      transition: background 150ms, border-color 150ms;
+    }
+    .p-btn:hover { background: var(--accent); color: #001a2e; border-color: var(--accent); }
+
+    /* DEALS/HIGHLIGHTS STRIP */
+    .deals-strip { padding: 0 1.5rem 3rem; }
+    .deals-inner { max-width: 1280px; margin: 0 auto; }
+    .deals-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+    .deals-header h2 { font-family: var(--font-head); font-size: 1.35rem; font-weight: 700; }
+    .deals-scroll {
+      display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.75rem;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .deal-card {
+      min-width: 200px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem; flex-shrink: 0;
+      transition: border-color 200ms;
+    }
+    .deal-card:hover { border-color: var(--accent); }
+    .deal-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.4rem; }
+    .deal-name { font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; line-height: 1.3; }
+    .deal-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* SERVICES */
+    .services {
+      background: var(--surface); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 4rem 1.5rem;
+    }
+    .services-inner { max-width: 1280px; margin: 0 auto; }
+    .services-inner h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .services-inner > p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+    .service-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      transition: border-color 200ms;
+    }
+    .service-card:hover { border-color: rgba(0,180,216,0.4); }
+    .service-num { font-family: var(--font-head); font-size: 2rem; font-weight: 700; color: rgba(0,180,216,0.2); margin-bottom: 1rem; }
+    .service-card h3 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* CONTACT */
+    .contact { padding: 4rem 1.5rem; }
+    .contact-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-bottom: 0.75rem; }
+    .contact p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
+    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+    .c-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: rgba(240,244,248,0.75); }
+    .c-item a { color: rgba(240,244,248,0.75); text-decoration: none; }
+    .c-item a:hover { color: var(--accent); }
+    .c-icon { width: 36px; height: 36px; background: var(--teal-muted); border-radius: 0.4rem; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .map-wrap { border-radius: var(--radius); overflow: hidden; height: 300px; border: 1px solid var(--border); }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* FOOTER */
+    footer { background: #0d0d1a; border-top: 1px solid var(--border); padding: 3rem 1.5rem 2rem; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .f-logo { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
+    .f-logo span { color: var(--accent); }
+    .f-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+    .f-col h4 { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(240,244,248,0.3); margin-bottom: 1rem; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .f-col a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 150ms; }
+    .f-col a:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-inner { grid-template-columns: auto auto; }
+      .nav-search { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-secondary { display: none; }
+      .trust-inner { gap: 1.25rem; justify-content: flex-start; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-btns { flex-direction: column; max-width: 280px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.9rem; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">Same-Day Service Available &nbsp;|&nbsp; Trusted in Lincoln Park for 30+ Years &nbsp;|&nbsp; 4.4 ⭐ Google Rating</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Chicago's <span>Cleaners</span></a>
+    <div class="nav-search">
+      <input type="text" placeholder="Dry cleaning, alterations, laundry..." />
+      <button aria-label="Search"><i data-lucide="search" style="width:16px;height:16px;"></i></button>
+    </div>
+    <div class="nav-actions">
+      <a href="tel:+17735496746" class="nav-call">
+        <i data-lucide="phone" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;"></i>
+        (773) 549-6746
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- NAV SECONDARY -->
+<div class="nav-secondary">
+  <div class="nav-sec-inner">
+    <a class="nav-sec-link" href="#">All Services</a>
+    <a class="nav-sec-link" href="#">Dry Cleaning</a>
+    <a class="nav-sec-link" href="#">Laundry & Wash</a>
+    <a class="nav-sec-link" href="#">Alterations</a>
+    <a class="nav-sec-link" href="#">Shirt Laundering</a>
+    <a class="nav-sec-link" href="#">Wedding Gowns</a>
+    <a class="nav-sec-link" href="#">Leather & Suede</a>
+    <a class="nav-sec-link" href="#">Household Items</a>
+    <a class="nav-sec-link" href="#contact">Hours & Location</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=1200&auto=format&fit=crop" alt="Clothes on hangers" />
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <i data-lucide="star" style="width:11px;height:11px;"></i>
+      4.4 Stars · Lincoln Park's Trusted Cleaners
+    </div>
+    <h1>Clean Clothes.<br /><span class="highlight">Expert Care.</span> Every Time.</h1>
+    <p>Professional dry cleaning, laundry, alterations, and specialty services. Trusted by Lincoln Park since 1990. Same-day service available.</p>
+    <div class="hero-btns">
+      <a href="tel:+17735496746" class="btn-teal">Call to Schedule</a>
+      <a href="#contact" class="btn-ghost">Hours & Location</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE BAR -->
+<div style="background: #00b4d8; padding: 1rem 1.5rem; text-align: center;">
+  <a href="tel:+17735496746" style="color: #001a2e; font-size: 1.5rem; font-weight: 800; text-decoration: none; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+    📞 Call Us: (773) 549-6746
+  </a>
+  <span style="color: rgba(0,26,46,0.65); font-size: 0.85rem; margin-left: 1.5rem;">Mon–Fri 7am–7pm | Sat 8am–6pm | Sun 10am–5pm</span>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <i data-lucide="clock" style="width:16px;height:16px;"></i>
+      Same-Day Service
+    </div>
+    <div class="trust-item">
+      <i data-lucide="star" style="width:16px;height:16px;"></i>
+      4.4 Star Rating
+    </div>
+    <div class="trust-item">
+      <i data-lucide="award" style="width:16px;height:16px;"></i>
+      30+ Years Experience
+    </div>
+    <div class="trust-item">
+      <i data-lucide="scissors" style="width:16px;height:16px;"></i>
+      Expert Alterations
+    </div>
+    <div class="trust-item">
+      <i data-lucide="dollar-sign" style="width:16px;height:16px;"></i>
+      Affordable Prices
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout" id="services">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Services</div>
+      <a class="sidebar-link active" href="#">All Services</a>
+      <a class="sidebar-link" href="#">Dry Cleaning</a>
+      <a class="sidebar-link" href="#">Laundry & Wash</a>
+      <a class="sidebar-link" href="#">Alterations & Tailoring</a>
+      <a class="sidebar-link" href="#">Shirt Laundering</a>
+      <a class="sidebar-link" href="#">Wedding Gowns</a>
+      <a class="sidebar-link" href="#">Household Items</a>
+      <a class="sidebar-link" href="#">Leather & Suede</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Quick Info</div>
+      <a class="sidebar-link" href="#">Hours & Location</a>
+      <a class="sidebar-link" href="#">Pricing Guide</a>
+      <a class="sidebar-link" href="#">Same-Day Policy</a>
+    </div>
+    <div class="sidebar-promo">
+      <div class="sidebar-promo-title">Questions?</div>
+      <p>Call us for pricing or to ask about your specific garment needs.</p>
+      <a href="tel:+17735496746">Call (773) 549-6746</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="content-header">
+      <h2>Our Services</h2>
+      <div class="content-tabs">
+        <button class="tab-btn active">All Services</button>
+        <button class="tab-btn">Specialty</button>
+        <button class="tab-btn">Same-Day</button>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=800&auto=format&fit=crop" alt="Dry Cleaning" />
+          <span class="p-badge popular">Most Popular</span>
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Signature</div>
+          <div class="p-name">Dry Cleaning</div>
+          <div class="p-spec">Suits, dresses, coats, delicate fabrics</div>
+          <div class="p-footer">
+            <div><span class="p-price">From $8</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&auto=format&fit=crop" alt="Laundry" />
+          <span class="p-badge">Same-Day</span>
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Wash & Fold</div>
+          <div class="p-name">Laundry & Wash</div>
+          <div class="p-spec">Drop-off wash, dry, fold service</div>
+          <div class="p-footer">
+            <div><span class="p-price">By the lb</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&auto=format&fit=crop" alt="Alterations" />
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Tailoring</div>
+          <div class="p-name">Alterations & Tailoring</div>
+          <div class="p-spec">Hemming, taking in, repairs, zippers</div>
+          <div class="p-footer">
+            <div><span class="p-price">From $12</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1621276012370-b4ee4b02a7a7?w=800&auto=format&fit=crop" alt="Shirt Laundering" />
+          <span class="p-badge popular">Popular</span>
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Crisp Press</div>
+          <div class="p-name">Shirt Laundering</div>
+          <div class="p-spec">Laundered, pressed, on hangers or boxed</div>
+          <div class="p-footer">
+            <div><span class="p-price">From $3.50</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" alt="Wedding Gown" />
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Bridal</div>
+          <div class="p-name">Wedding Gown Cleaning</div>
+          <div class="p-spec">Expert cleaning & preservation</div>
+          <div class="p-footer">
+            <div><span class="p-price">Call for quote</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=800&auto=format&fit=crop" alt="Leather" />
+        </div>
+        <div class="p-body">
+          <div class="p-brand">Specialty</div>
+          <div class="p-name">Leather & Suede</div>
+          <div class="p-spec">Specialized cleaning & conditioning</div>
+          <div class="p-footer">
+            <div><span class="p-price">Call for quote</span></div>
+            <a href="tel:+17735496746" class="p-btn">Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS STRIP -->
+<div class="deals-strip">
+  <div class="deals-inner">
+    <div class="deals-header">
+      <h2>Service Highlights</h2>
+      <a href="tel:+17735496746" style="color:var(--accent);font-size:0.85rem;text-decoration:none;">Call for Pricing</a>
+    </div>
+    <div class="deals-scroll">
+      <div class="deal-card">
+        <div class="deal-label">Same-Day</div>
+        <div class="deal-name">Dry Cleaning Turnaround</div>
+        <div class="deal-desc">Drop off by 10am, pick up same day</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-label">Specialty</div>
+        <div class="deal-name">Wedding Gown Preservation</div>
+        <div class="deal-desc">Expert hand-cleaning and museum-quality boxing</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-label">Tailoring</div>
+        <div class="deal-name">Same-Week Alterations</div>
+        <div class="deal-desc">Most alterations ready in 3–5 business days</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-label">Bulk</div>
+        <div class="deal-name">Wash & Fold Laundry</div>
+        <div class="deal-desc">Priced by pound — affordable for any load size</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-label">Specialty</div>
+        <div class="deal-name">Leather & Suede Care</div>
+        <div class="deal-desc">Conditioning and restoration for premium materials</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-label">Household</div>
+        <div class="deal-name">Comforters & Duvets</div>
+        <div class="deal-desc">Large-item cleaning for bedding and drapes</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section class="services">
+  <div class="services-inner">
+    <h2>Why Choose Chicago's Discount Cleaners</h2>
+    <p>We're not a chain. We're your neighbors — and we've been taking care of Lincoln Park's clothes for over 30 years.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Same-Day Service Available</h3>
+        <p>Drop off in the morning and pick up your freshly cleaned garments that same evening. Because we know you're busy.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Expert Alterations On-Site</h3>
+        <p>Our skilled tailors are in-house. From simple hemming to complex bridal alterations — all done with precision and care.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Honest Discount Prices</h3>
+        <p>We live up to our name. Quality professional cleaning at prices that won't make you think twice before dropping off that coat.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Trusted for 30+ Years</h3>
+        <p>Since 1990, Lincoln Park has counted on us. 4.4 stars on Google because we treat every garment like it's our own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2>Find Us on Fullerton Ave</h2>
+      <p>Convenient hours, easy parking, and a friendly team ready to help. No appointment needed for most services.</p>
+      <div class="contact-info">
+        <div class="c-item">
+          <div class="c-icon"><i data-lucide="map-pin" style="width:16px;height:16px;"></i></div>
+          <span>1333 W Fullerton Ave, Chicago, IL 60614</span>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i data-lucide="phone" style="width:16px;height:16px;"></i></div>
+          <a href="tel:+17735496746">(773) 549-6746</a>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i data-lucide="clock" style="width:16px;height:16px;"></i></div>
+          <div>
+            <div>Mon–Fri: 7:00am – 7:00pm</div>
+            <div>Saturday: 8:00am – 6:00pm</div>
+            <div>Sunday: 10:00am – 5:00pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=1333+W+Fullerton+Ave+Chicago+IL+60614&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Chicago's Discount Cleaners Location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="f-logo">Chicago's <span>Cleaners</span></div>
+        <p class="f-desc">Lincoln Park's trusted dry cleaner since 1990. Professional cleaning, expert alterations, and honest prices — all at 1333 W Fullerton Ave.</p>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Dry Cleaning</a></li>
+          <li><a href="#">Laundry & Wash</a></li>
+          <li><a href="#">Alterations</a></li>
+          <li><a href="#">Shirt Laundering</a></li>
+          <li><a href="#">Wedding Gowns</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="#">Household Items</a></li>
+          <li><a href="#">Leather & Suede</a></li>
+          <li><a href="#">Same-Day Service</a></li>
+          <li><a href="#">Specialty Cleaning</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#">Hours</a></li>
+          <li><a href="#">Location</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Chicago's Discount Cleaners · 1333 W Fullerton Ave, Chicago, IL 60614 · (773) 549-6746</span>
+      <span>Built by <a href="https://cornerdigitalgroup.com" style="color:var(--accent);text-decoration:none;">Corner Digital Group</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicago's Discount Cleaners — Professional Dry Cleaning & Laundry</title>
+  <meta name="description" content="Chicago's Discount Cleaners at 1333 W Fullerton Ave. Professional dry cleaning, laundry, alterations, and more. Serving Lincoln Park since 1990." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1e2a4a;
+      --navy-light: #2a3a62;
+      --accent: #1a56db;
+      --accent-hover: #1547c0;
+      --bg: #f8f9fc;
+      --surface: #ffffff;
+      --border: #e5e9f0;
+      --text: #111827;
+      --muted: #6b7280;
+      --radius: 0.75rem;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 68px;
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800; color: var(--navy);
+      text-decoration: none; letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 150ms;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: white;
+      border: none; border-radius: 0.5rem;
+      padding: 0.75rem 1.75rem; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background 150ms, transform 100ms;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      min-height: 580px;
+      display: flex; align-items: center;
+      overflow: hidden; position: relative;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(26,86,219,0.15) 0%, transparent 60%);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; padding: 5rem 1.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+      position: relative; z-index: 1; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #c7d8ff; border-radius: 2rem;
+      padding: 0.35rem 0.9rem; font-size: 0.8rem; font-weight: 600;
+      margin-bottom: 1.5rem; width: fit-content;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 800;
+      color: white; line-height: 1.12; letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 em { color: #60a5fa; font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7;
+      margin-bottom: 2.25rem; max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 0.85rem 2rem; border-radius: 0.6rem;
+      font-size: 0.95rem; font-weight: 700; text-decoration: none;
+      transition: background 150ms, transform 100ms;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      padding: 0.85rem 2rem; border-radius: 0.6rem;
+      font-size: 0.95rem; font-weight: 600; text-decoration: none;
+      transition: border-color 150ms, background 150ms;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.06); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.5rem;
+    }
+    .stat-item { color: white; }
+    .stat-num { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; color: #60a5fa; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.1rem; }
+    .hero-img {
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      aspect-ratio: 4/3;
+    }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* CATEGORIES */
+    .categories { background: var(--surface); padding: 3rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .categories-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800;
+      letter-spacing: -0.03em; color: var(--text); margin-bottom: 2.5rem;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .cat-card {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.75rem; padding: 1.5rem 1rem;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--radius); text-decoration: none; color: var(--text);
+      transition: border-color 200ms, transform 200ms, box-shadow 200ms;
+    }
+    .cat-card:hover {
+      border-color: var(--accent); transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,86,219,0.12);
+    }
+    .cat-icon {
+      width: 52px; height: 52px; border-radius: 0.75rem;
+      background: rgba(26,86,219,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .cat-name { font-size: 0.82rem; font-weight: 600; text-align: center; }
+
+    /* PRODUCTS / SERVICES */
+    .products { padding: 5rem 1.5rem; }
+    .products-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .view-all {
+      font-size: 0.88rem; font-weight: 600; color: var(--accent);
+      text-decoration: none; display: flex; align-items: center; gap: 0.25rem;
+    }
+    .view-all:hover { text-decoration: underline; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: transform 200ms, box-shadow 200ms;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+    .product-img {
+      aspect-ratio: 4/3; overflow: hidden; background: var(--bg);
+      position: relative;
+    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 300ms; }
+    .product-card:hover .product-img img { transform: scale(1.04); }
+    .product-badge {
+      position: absolute; top: 0.75rem; left: 0.75rem;
+      background: var(--accent); color: white;
+      font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.6rem;
+      border-radius: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .product-info { padding: 1.25rem; }
+    .product-brand { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+    .product-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.35; }
+    .product-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-size: 1.1rem; font-weight: 800; color: var(--navy); }
+    .product-btn {
+      background: var(--navy); color: white;
+      border: none; border-radius: 0.5rem;
+      padding: 0.55rem 1rem; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background 150ms;
+    }
+    .product-btn:hover { background: var(--navy-light); }
+
+    /* TRUST */
+    .brands { background: var(--navy); padding: 3.5rem 1.5rem; }
+    .brands-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .brands h2 { color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2rem; }
+    .brand-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem; }
+    .brand-logo {
+      color: rgba(255,255,255,0.35); font-size: 1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      transition: color 200ms; text-align: center;
+    }
+    .brand-logo span { display: block; font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .brand-logo:hover { color: white; }
+
+    /* WHY US */
+    .why { padding: 5rem 1.5rem; background: var(--bg); }
+    .why-inner { max-width: 1200px; margin: 0 auto; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .why-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      transition: border-color 200ms;
+    }
+    .why-card:hover { border-color: rgba(26,86,219,0.3); }
+    .why-icon {
+      width: 48px; height: 48px; border-radius: 0.65rem;
+      background: rgba(26,86,219,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); margin-bottom: 1.25rem;
+    }
+    .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* CONTACT */
+    .contact { background: var(--surface); padding: 5rem 1.5rem; border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .contact p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; }
+    .contact-item i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+    .map-wrap { border-radius: var(--radius); overflow: hidden; height: 300px; border: 1.5px solid var(--border); }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.45); padding: 3rem 1.5rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+    .footer-brand { font-size: 1.2rem; font-weight: 800; color: white; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .footer-brand span { color: #60a5fa; }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; }
+    .footer-col h4 { color: white; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.85rem; transition: color 150ms; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-img { max-width: 520px; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: block; }
+      .hero-inner { padding: 3.5rem 1.5rem; }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-btns { flex-direction: column; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Chicago's<span>Cleaners</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Hours & Location</a></li>
+    </ul>
+    <a href="tel:+17735496746" class="nav-cta">
+      <i data-lucide="phone" style="width:15px;height:15px;"></i>
+      (773) 549-6746
+    </a>
+    <button class="hamburger" aria-label="Menu">
+      <i data-lucide="menu" style="width:24px;height:24px;"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i data-lucide="star" style="width:12px;height:12px;"></i>
+        4.4 Stars on Google · Lincoln Park's Trusted Cleaners
+      </div>
+      <h1>Professional Cleaning,<br /><em>Affordable</em> Prices</h1>
+      <p>Expert dry cleaning, same-day laundry, expert alterations, and more — all in the heart of Lincoln Park. Trusted by the community for 30+ years.</p>
+      <div class="hero-btns">
+        <a href="tel:+17735496746" class="btn-primary">Call to Schedule</a>
+        <a href="#contact" class="btn-outline">Get Directions</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years in Business</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4.4★</div>
+          <div class="stat-label">Google Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">Same-Day</div>
+          <div class="stat-label">Service Available</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=1200&auto=format&fit=crop" alt="Clothes on hangers at dry cleaners" />
+    </div>
+  </div>
+</section>
+
+<!-- PHONE BAR -->
+<div style="background: #1a56db; padding: 1rem 1.5rem; text-align: center;">
+  <a href="tel:+17735496746" style="color: white; font-size: 1.5rem; font-weight: 800; text-decoration: none; font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">
+    📞 Call Us: (773) 549-6746
+  </a>
+  <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-left: 1.5rem;">Mon–Fri 7am–7pm | Sat 8am–6pm | Sun 10am–5pm</span>
+</div>
+
+<!-- SERVICES GRID -->
+<section class="categories" id="services">
+  <div class="categories-inner">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Our Services</div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="shirt" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Dry Cleaning</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="wind" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Laundry & Wash</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="scissors" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Alterations</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="package" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Shirt Laundering</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="heart" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Wedding Gowns</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="home" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Household Items</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="tag" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Leather & Suede</span>
+      </a>
+      <a class="cat-card" href="#">
+        <div class="cat-icon"><i data-lucide="clock" style="width:24px;height:24px;"></i></div>
+        <span class="cat-name">Same-Day Service</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAILS -->
+<section class="products" id="service-details">
+  <div class="products-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Service Details</div>
+        <div class="section-title">Expert Care for Every Garment</div>
+      </div>
+      <a href="tel:+17735496746" class="view-all">Call for Pricing <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=800&auto=format&fit=crop" alt="Dry Cleaning" />
+          <span class="product-badge">Most Popular</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Signature Service</div>
+          <div class="product-name">Dry Cleaning</div>
+          <div class="product-desc">Professional solvent-based cleaning for suits, dresses, coats, and delicate fabrics that can't be washed.</div>
+          <div class="product-footer">
+            <span class="product-price">Starting at $8</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&auto=format&fit=crop" alt="Laundry Service" />
+          <span class="product-badge" style="background: var(--navy);">Quick Turnaround</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Wash & Fold</div>
+          <div class="product-name">Laundry & Wash</div>
+          <div class="product-desc">Drop off your laundry and pick it up clean, folded, and ready to go. Same-day service available.</div>
+          <div class="product-footer">
+            <span class="product-price">By the pound</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&auto=format&fit=crop" alt="Alterations" />
+          <span class="product-badge" style="background: #059669;">Expert Tailoring</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Tailoring</div>
+          <div class="product-name">Alterations & Tailoring</div>
+          <div class="product-desc">Expert alterations for a perfect fit — hemming, taking in, letting out, zipper repair, and more.</div>
+          <div class="product-footer">
+            <span class="product-price">Starting at $12</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1621276012370-b4ee4b02a7a7?w=800&auto=format&fit=crop" alt="Shirt Laundering" />
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Crisp & Clean</div>
+          <div class="product-name">Shirt Laundering</div>
+          <div class="product-desc">Professionally laundered and pressed dress shirts — on hangers or boxed and folded to your preference.</div>
+          <div class="product-footer">
+            <span class="product-price">Starting at $3.50</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" alt="Wedding Gown" />
+          <span class="product-badge">Specialty</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bridal Care</div>
+          <div class="product-name">Wedding Gown Cleaning</div>
+          <div class="product-desc">Preserve your most special garment. Expert hand-cleaning and preservation for wedding gowns and formalwear.</div>
+          <div class="product-footer">
+            <span class="product-price">Call for quote</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=800&auto=format&fit=crop" alt="Leather Cleaning" />
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Premium Service</div>
+          <div class="product-name">Leather & Suede</div>
+          <div class="product-desc">Specialized cleaning and conditioning for leather jackets, suede coats, and luxury garments.</div>
+          <div class="product-footer">
+            <span class="product-price">Call for quote</span>
+            <a href="tel:+17735496746" class="product-btn">Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="brands">
+  <div class="brands-inner">
+    <h2>Why Customers Trust Chicago's Discount Cleaners</h2>
+    <div class="brand-logos">
+      <div class="brand-logo"><span>⭐</span>4.4 Stars</div>
+      <div class="brand-logo"><span>📅</span>30+ Years</div>
+      <div class="brand-logo"><span>⚡</span>Same-Day</div>
+      <div class="brand-logo"><span>💰</span>Best Prices</div>
+      <div class="brand-logo"><span>📍</span>Lincoln Park</div>
+      <div class="brand-logo"><span>👔</span>All Fabrics</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="section-label">Why Choose Us</div>
+    <div class="section-title">Your Neighborhood Cleaners</div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="clock" style="width:22px;height:22px;"></i></div>
+        <h3>Same-Day Service</h3>
+        <p>Drop off in the morning, pick up in the evening. We offer same-day service on most dry cleaning and laundry items.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="shield-check" style="width:22px;height:22px;"></i></div>
+        <h3>Trusted for 30+ Years</h3>
+        <p>Chicago's Discount Cleaners has been a Lincoln Park staple for over three decades. Your garments are in experienced hands.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="dollar-sign" style="width:22px;height:22px;"></i></div>
+        <h3>Honest, Affordable Prices</h3>
+        <p>We live up to our name. Discount prices without cutting corners on quality — that's our promise to every customer.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="scissors" style="width:22px;height:22px;"></i></div>
+        <h3>Expert Alterations</h3>
+        <p>Our skilled tailors handle everything from simple hemming to complex garment reconstructions with precision.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="star" style="width:22px;height:22px;"></i></div>
+        <h3>4.4 Star Rated</h3>
+        <p>Consistently praised by our customers on Google. We take pride in quality work and friendly service every time.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i data-lucide="map-pin" style="width:22px;height:22px;"></i></div>
+        <h3>Convenient Location</h3>
+        <p>Located on W Fullerton Ave in Lincoln Park — easy to reach, with convenient hours including weekends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label">Hours & Location</div>
+      <h2>Visit Us on Fullerton Ave</h2>
+      <p>Conveniently located in Lincoln Park. Drop in during our extended hours — no appointment needed for most services.</p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <i data-lucide="map-pin" style="width:18px;height:18px;color:var(--accent);"></i>
+          <span>1333 W Fullerton Ave, Chicago, IL 60614</span>
+        </div>
+        <div class="contact-item">
+          <i data-lucide="phone" style="width:18px;height:18px;color:var(--accent);"></i>
+          <a href="tel:+17735496746" style="text-decoration:none;color:inherit;">(773) 549-6746</a>
+        </div>
+        <div class="contact-item">
+          <i data-lucide="clock" style="width:18px;height:18px;color:var(--accent);"></i>
+          <div>
+            <div>Mon–Fri: 7:00am – 7:00pm</div>
+            <div>Saturday: 8:00am – 6:00pm</div>
+            <div>Sunday: 10:00am – 5:00pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=1333+W+Fullerton+Ave+Chicago+IL+60614&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Chicago's Discount Cleaners Location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Chicago's<span>Cleaners</span></div>
+        <p class="footer-desc">Your trusted neighborhood dry cleaner in Lincoln Park since 1990. Professional cleaning, expert alterations, and honest prices — every time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Dry Cleaning</a></li>
+          <li><a href="#">Laundry & Wash</a></li>
+          <li><a href="#">Alterations</a></li>
+          <li><a href="#">Shirt Laundering</a></li>
+          <li><a href="#">Wedding Gowns</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#">Hours</a></li>
+          <li><a href="#">Location</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Chicago's Discount Cleaners. All rights reserved. &nbsp;|&nbsp; 1333 W Fullerton Ave, Chicago, IL 60614 &nbsp;|&nbsp; (773) 549-6746</span>
+      <span>Built by <a href="https://cornerdigitalgroup.com" style="color:#60a5fa;text-decoration:none;">Corner Digital Group</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

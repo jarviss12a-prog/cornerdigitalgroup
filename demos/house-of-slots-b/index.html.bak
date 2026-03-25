@@ -178,7 +178,7 @@ footer span{color:var(--red)}
         <h3>Location</h3>
         <p class="info-detail">📍 6823 Stanley Ave, Berwyn, IL 60402</p>
         <p class="info-detail">📞 <a href="tel:">Call for details</a></p>
-        <iframe src="https://maps.google.com/maps?q=6823+Stanley+Ave,+Berwyn,+IL+60402&output=embed" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=6823+Stanley+Ave,Berwyn,IL+60402" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </div>
